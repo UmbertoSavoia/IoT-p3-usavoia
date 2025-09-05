@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wil-app
+  name: wil-svc
 spec:
   type: NodePort
   selector:
@@ -32,12 +32,11 @@ spec:
   ports:
   - port: 8888
     targetPort: 8888
-    protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: apps-ingress
+  name: app-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
@@ -48,6 +47,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: wil-app
+            name: wil-svc
             port:
               number: 8888
